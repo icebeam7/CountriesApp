@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CountriesApp.Views.CountryListView"
+             xmlns:vm="clr-namespace:CountriesApp.ViewModels"
+             Title="CountryListView">
+
+    <ContentPage.BindingContext>
+        <vm:CountryListViewModel/>
+    </ContentPage.BindingContext>
+    
+    <Grid>
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           Color="Orange"/>
+
+        <CollectionView ItemsSource="{Binding Countries}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="*,Auto" 
+                          ColumnDefinitions="Auto,*"
+                          ColumnSpacing="10"
+                          RowSpacing="10">
+                        <Image Source="{Binding FlagUrl}" 
+                               WidthRequest="64"
+                               HeightRequest="64"/>
+
+                        <Label Text="{Binding CountryName}"
+                               Grid.Column="1" 
+                               TextColor="Black"
+                               VerticalOptions="Center"
+                               FontSize="18"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
